@@ -13,6 +13,7 @@ function App() {
   const dispatch = useDispatch();
   const cartIsVisible = useSelector((state) => state.ui.cartIsVisible);
   const cart = useSelector((state) => state.cart);
+  console.log("Appjs Cart", cart);
   const notification = useSelector((state) => state.ui.notification);
 
   useEffect(() => {
@@ -25,9 +26,10 @@ function App() {
       return;
     }
 
-    dispatch(sendCartData(cart));
+    if (cart.changed) {
+      dispatch(sendCartData(cart));
+    }
   }, [cart, dispatch]);
-
   return (
     <>
       {notification && (

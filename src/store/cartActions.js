@@ -9,7 +9,7 @@ export const fetchCartData = () => {
       );
 
       if (!response.ok) {
-        throw new Error("Could not fetch Cart data");
+        throw new Error("Could not fetch cart data!");
       }
 
       const data = await response.json();
@@ -19,19 +19,23 @@ export const fetchCartData = () => {
 
     try {
       const cartData = await fetchData();
-      dispatch(cartActions.replaceCart(cartData));
+      dispatch(
+        cartActions.replaceCart({
+          items: cartData.items || [],
+          totalQuantity: cartData.totalQuantity,
+        })
+      );
     } catch (error) {
       dispatch(
         uiActions.showNotification({
           status: "error",
           title: "Error!",
-          message: "Sending Cart Data Failed!",
+          message: "Fetching cart data failed!",
         })
       );
     }
   };
 };
-
 export const sendCartData = (cart) => {
   return async (dispatch) => {
     dispatch(
@@ -47,12 +51,15 @@ export const sendCartData = (cart) => {
         "https://react-http-c6eb2-default-rtdb.europe-west1.firebasedatabase.app/cart.json",
         {
           method: "PUT",
-          body: JSON.stringify(cart),
+          body: JSON.stringify({
+            items: cart.items,
+            totalQuantity: cart.totalQuantity,
+          }),
         }
       );
 
       if (!response.ok) {
-        throw new Error("Sending cart data failed");
+        throw new Error("Sending cart data failed.");
       }
     };
 
