@@ -1,4 +1,4 @@
-# Froms Project
+# Redux Project
 
 Advanced Redux Concepts from Max's Course
 
