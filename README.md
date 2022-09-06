@@ -1,6 +1,6 @@
-# Redux Project
+# Redux Tool Kit Project
 
-Advanced Redux Concepts from Max's Course
+Advanced Redux Tool Kit Concepts from Max's Course
 
 ## Course
 
